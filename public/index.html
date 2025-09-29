@@ -1,20 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <link rel="shortcut icon" href="public/favicon.ico" type="image/x-icon" />
-    <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" />
-    <link rel="apple-touch-icon" sizes="180x180" href="public/apple-touch-icon.png"/>
-    <link rel="icon" type="image/png" sizes="32x32" href="public/favicon-32x32.png"/>
-    <link rel="icon" type="image/png" sizes="16x16" href="public/favicon-16x16.png"/>
-    <link rel="manifest" href="public/manifest.json"/>
-    <link rel="mask-icon" href="public/safari-pinned-tab.svg" color="#5bbad5"/>
-    <meta name="msapplication-TileColor" content="#00aba9"/>
-    <meta name="theme-color" content="#7fb8e3"/>
     <title>AR.js Studio</title>
+    <link rel="shortcut icon" href="assets/img/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="pages/style.css" />
+    <link rel="stylesheet" href="pages/main/main.css" />
+
+    <!-- import the webpage's javascript file -->
+    <script src="components/header/header.js"></script>
+    <script src="pages/main/main.js"></script>
+    <script src="components/feedback/stickybutton.js"></script>
   </head>
+
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="main"></div>
+    <page-header assetsUrl="assets"></page-header>
+    <div class="background">
+      <div class="content">
+        <p class="title">Web-enabled AR experiences</p>
+        <p class="paragraph">
+            AR.js Studio is an open-source AR creation platform for building custom augmented reality experiences.
+            You can create location-based or marker-based AR applications and deploy them straight to the web.
+            That means you won’t have to download any extra apps to access your experience!
+            Working with AR.js Studio doesn’t require any knowledge of coding, either.
+            You can start creating your first AR project right now.
+        </p>
+
+        <img class="splashscreen" src="assets/img/splashscreen.png" alt="Demo image home page"/>
+
+        <p class="lead">Pick your project type</p>
+
+        <div>
+          <label class="radio-container paragraph">
+            <span class="radio-title">Location-based</span>
+            <input
+              id="location"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span>
+                Place your creation on a map, so it remains tied to a physical location.
+            </span>
+            <span class="checkmark"></span>
+          </label>
+
+          <label class="radio-container paragraph">
+            <span class="radio-title">Marker-based</span>
+            <input
+              id="marker"
+              type="radio"
+              name="radio"
+              onclick="radioOnclick(this)"
+            />
+            <span>
+                Connect your creation to a visual marker, which can be moved to any location.
+            </span>
+            <span class="checkmark"></span>
+          </label>
+
+          <div class="buttons-container">
+            <a onclick="anchorOnclick(this)" id="start-building" class="primary-button">Start building</a>
+          </div>
+          <feedback-button></feedback-button>
+          <div id="error" class="error" style="visibility: hidden;">
+            Please, select a project type.
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
