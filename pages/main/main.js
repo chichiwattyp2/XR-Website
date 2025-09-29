@@ -1,26 +1,30 @@
-window.onload = () => {
-    [...document.querySelectorAll('input')].forEach((input) => input.checked = false);
-};
+'use client'; // ✅ forces client-side rendering for this page
 
-/* Update start building anchor href location based on radioState */
-function radioOnclick(self) {
-    const radioState = self.getAttribute('id')
-    let startBuilding = document.getElementById("start-building")
+import { useEffect } from 'react';
 
-    if (radioState == "marker") {
-        startBuilding.href = "pages/marker/index.html"
-    } else if (radioState == "location") {
-        startBuilding.href = "pages/location/index.html"
-    } else {
-        // Display error message
+export default function MainPage() {
+  useEffect(() => {
+    // ✅ Only runs in browser, safe to use window
+    if (typeof window !== 'undefined') {
+      console.log('Window width:', window.innerWidth);
+
+      // Example: reattach any onclicks you previously defined
+      if (window.radioOnclick) {
+        // eslint-disable-next-line no-unused-vars
+        const radioHandler = window.radioOnclick;
+      }
+
+      if (window.anchorOnclick) {
+        // eslint-disable-next-line no-unused-vars
+        const anchorHandler = window.anchorOnclick;
+      }
     }
-}
+  }, []);
 
-function anchorOnclick(self) {
-    const href = self.getAttribute('href')
-    if (!href) {
-        const error = document.getElementById("error")
-        error.style.visibility = "visible"
-    }
+  return (
+    <main>
+      <h1>Main Page</h1>
+      {/* your actual UI here */}
+    </main>
+  );
 }
-
