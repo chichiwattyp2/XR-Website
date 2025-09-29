@@ -1,13 +1,19 @@
-'use client';
-import Script from 'next/script';
+// pages/location/location.js
 
-export default function LocationPage() {
-  return (
-    <main>
-      <h1>Location Export</h1>
-      {/* Load utilities first */}
-      <Script src="/js/utils.js" strategy="beforeInteractive" />
-      <Script src="/js/location.js" strategy="afterInteractive" />
-    </main>
-  );
+if (typeof window !== 'undefined' && typeof Package !== 'undefined') {
+  const pkg = new Package({
+    arType: 'location',
+    assetType: window.assetType, // image/audio/video/3d
+    assetFile: window.assetFile,
+    assetParam: window.assetParam,
+  });
+
+  pkg.serve({ packageType: 'zip' }).then((base64) => {
+    const link = document.createElement('a');
+    link.href = `data:application/zip;base64,${base64}`;
+    link.download = 'ar.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
 }
