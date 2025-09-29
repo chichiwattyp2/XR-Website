@@ -1,20 +1,12 @@
-// pages/marker/marker.js
+'use client';
+import Script from 'next/script';
 
-if (typeof window !== 'undefined' && typeof Package !== 'undefined') {
-  new Package({
-    arType: 'marker',
-    assetType: window.assetType,
-    assetFile: window.assetFile,
-    assetParam: window.assetParam,
-    markerPatt: markerPattern, // assumes markerPattern is set earlier
-  })
-    .serve({ packageType: 'zip' })
-    .then((base64) => {
-      const link = document.createElement('a');
-      link.href = `data:application/zip;base64,${base64}`;
-      link.download = 'ar.zip';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
+export default function MarkerPage() {
+  return (
+    <main>
+      <h1>Marker Export</h1>
+      <Script src="/js/utils.js" strategy="beforeInteractive" />
+      <Script src="/js/marker.js" strategy="afterInteractive" />
+    </main>
+  );
 }
